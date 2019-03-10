@@ -1,0 +1,15 @@
+.nav-container {
+    margin: 0 auto;
+    display: flex;
+    max-width: 1024px;
+    justify-content: space-around;
+    background-color: #062469c9;
+}
+
+.nav-item a {
+    color: white;
+}
+
+.nav-item {
+    margin: 10px;
+}
