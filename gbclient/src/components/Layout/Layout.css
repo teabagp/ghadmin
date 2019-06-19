@@ -1,4 +1,45 @@
+.appBarShift {
+    padding-left: 240px;
+}
+
+.drawer-header {
+    display: 'flex';
+    text-align: end;
+}
+
+.header {
+    justify-content: space-between;
+}
+
+.header > div{
+    display: flex;
+    align-items: center;
+}
+
+.drawer-header-button {
+    background-color: #3f51b5;
+}
+
+.drawer-toolbar {
+    
+}
+
 .content {
-    max-width: 1024px;
-    margin: 0 auto;
+    flex-grow: 1;
+    /* width: 100%; */
+    padding-top: 65px;
+    /* padding: 65px 30px 20px 30px; */
+}
+
+.drawer {
+    width: 240px;
+    flex-shrink: 0;
+}
+
+.list {
+    width: 240px;
+}
+
+.root {
+    display: flex;
 }

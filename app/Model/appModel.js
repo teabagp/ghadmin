@@ -1,25 +1,41 @@
 var sql = require('./db.js');
+const utils = require('../Utils');
 
 //Task object constructor
-var User = function(user){
-    this.user = user.user;
-    this.status = user.status;
-    this.created_at = new Date();
+var Customer = function(data){
+    let customer;
+    if(Array.isArray(data)) {
+        customer = data[0];
+    } else {
+        customer = data;
+    }
+    
+    this.idcustomers = customer.idcustomers;
+    this.name = customer.name;
+    this.surname = customer.surname;
+    this.patronym = customer.patronym;
+    this.birthday = customer.birthday;
+    this.email = customer.email;
+    this.phone = customer.phone;
+    this.lessons = customer.lessons;
+    this.language = customer.language;
+    this.work = customer.work;
 };
-// Task.createTask = function createUser(newTask, result) {    
-//         sql.query("INSERT INTO tasks set ?", newTask, function (err, res) {
-                
-//                 if(err) {
-//                     console.log("error: ", err);
-//                     result(err, null);
-//                 }
-//                 else{
-//                     console.log(res.insertId);
-//                     result(null, res.insertId);
-//                 }
-//             });           
-// };
-// Task.getTaskById = function createUser(taskId, result) {
+
+Customer.addNewCustomer = function createUser(newCustomer, result) {
+    // console.log(newCustomer);
+    sql.query("INSERT INTO customers set ?", newCustomer, function (err, res) {
+            
+        if(err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+        else{
+            result(null, res.insertId);
+        }
+    });           
+};
+// Customer.getTaskById = function createUser(taskId, result) {
 //         sql.query("Select task from tasks where id = ? ", taskId, function (err, res) {             
 //                 if(err) {
 //                     console.log("error: ", err);
@@ -31,43 +47,62 @@ var User = function(user){
 //                 }
 //             });   
 // };
-User.getAllTask = function getAllTask(result) {
-        sql.query("Select * from users", function (err, res) {
+Customer.getAllCustomers = function getAllCustomers(result) {
+    sql.query("Select * from customers", function (err, res) {
 
-                if(err) {
-                    console.log("error: ", err);
-                    result(null, err);
-                }
-                else{
-                  console.log('tasks : ', res);  
+        if(err) {
+            console.log("error: ", err);
+            result(null, err);
+        }
+        else{
+            console.log('Customers : ', res);  
 
-                 result(null, res);
-                }
-            });   
+            result(null, res);
+        }
+    });   
 };
-// Task.updateById = function(id, task, result){
-//   sql.query("UPDATE tasks SET task = ? WHERE id = ?", [task.task, id], function (err, res) {
-//           if(err) {
-//               console.log("error: ", err);
-//                 result(null, err);
-//              }
-//            else{   
-//              result(null, res);
-//                 }
-//             }); 
-// };
-// Task.remove = function(id, result){
-//      sql.query("DELETE FROM tasks WHERE id = ?", [id], function (err, res) {
 
-//                 if(err) {
-//                     console.log("error: ", err);
-//                     result(null, err);
-//                 }
-//                 else{
-               
-//                  result(null, res);
-//                 }
-//             }); 
-// };
+Customer.getAllTeachers = function getAllTeachers(result) {
+    sql.query("Select * from teacher", function (err, res) {
 
-module.exports= User;
+        if(err) {
+            console.log("error: ", err);
+            result(null, err);
+        }
+        else{
+            console.log('Customers : ', res);  
+
+            result(null, res);
+        }
+    });   
+};
+Customer.updateById = function(id, customerData, result) {
+    // const queryStr = prepareUpdateQuery(id, customerData);
+
+    const data = utils.parseObjToStringWithSeparte(customerData, "=");
+    // console.log(data);
+    // console.log(id)
+    sql.query(`UPDATE customers SET ${data} WHERE idcustomers = ${id}`, function (err, res) {
+        if(err) {
+            console.log("error: ", err);
+            result(null, err);
+        } else {   
+            result(null, res);
+        }
+    }); 
+};
+Customer.remove = function(id, result){
+    console.log(id);
+    //  sql.query(`DELETE FROM customers WHERE id = ${id}`, function (err, res) {
+    //     if(err) {
+    //         console.log("error: ", err);
+    //         result(null, err);
+    //     }
+    //     else{
+        
+    //         result(null, res);
+    //     }
+    // }); 
+};
+
+module.exports = Customer;

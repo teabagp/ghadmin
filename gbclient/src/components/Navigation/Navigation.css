@@ -1,15 +1,22 @@
 .nav-container {
-    margin: 0 auto;
+    /* margin: 0 auto;
     display: flex;
     max-width: 1024px;
-    justify-content: space-around;
-    background-color: #062469c9;
+    justify-content: space-around; */
+    /* background-color: #062469c9; */
 }
 
-.nav-item a {
+/* .nav-item a {
     color: white;
+} */
+
+.list-item {
+    background-color: #6573c3;
 }
 
 .nav-item {
-    margin: 10px;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    /* margin: 10px; */
 }
